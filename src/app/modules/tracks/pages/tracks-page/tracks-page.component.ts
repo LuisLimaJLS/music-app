@@ -4,7 +4,6 @@ import { SectionGenericComponent } from '@shared/components/section-generic/sect
 
 import { TrackService } from '@modules/tracks/services/track.service';
 import { Subscription } from 'rxjs';
-import { response } from 'express';
 
 @Component({
   selector: 'app-tracks-page',
@@ -21,26 +20,25 @@ export class TracksPageComponent {
   constructor(private trackService: TrackService) { }
 
   ngOnInit(): void {
-    this.loadDataAll()
-    this.loadDataRandom()
+    //this.loadDataAll()
+    //this.loadDataRandom()
+    this.trackService.getAllTracks$().subscribe(
+      response=>{
+        console.log(response)
+      }
+    )
   }
 
   async loadDataAll(): Promise<any> {
-    //this.tracksTrending = await this.trackService.getAllTracks$().toPromise()
-    const observer1$ = this.trackService.dataTracksTrending$
-    .subscribe(response=>{
-      this.tracksTrending = response
-      this.tracksRandom = response
-    })
-    this.listObservers$.push(observer1$)
+    //this.tracksTrending =
+    /*this.trackService.getAllTracks$().subscribe(
+      response=>{
+        console.log(response)
+      }
+    )*/
   }
 
   loadDataRandom(): void {
-    const observer2$ = this.trackService.dataTracksRandom$
-    .subscribe(response=>{
-      this.tracksRandom = [...this.tracksRandom, ...response]
-    })
-    this.listObservers$.push(observer2$)
 
     //this.trackService.getAllRandom$()
     //  .subscribe((response: TrackModel[]) => {
