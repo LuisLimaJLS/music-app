@@ -23,8 +23,8 @@ export class CardPlayerComponent {
   }
 
   sendPlay(track: TrackModel): void {
-    //this.multimediaService.trackInfo$.next(track)
-    this.multimediaService.callback.emit(track)
+    this.multimediaService.trackInfo$.next(track)
+    //this.multimediaService.callback.emit(track)
   }
 
 }
