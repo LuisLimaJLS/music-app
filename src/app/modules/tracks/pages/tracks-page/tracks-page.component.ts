@@ -20,35 +20,27 @@ export class TracksPageComponent {
   constructor(private trackService: TrackService) { }
 
   ngOnInit(): void {
-    //this.loadDataAll()
-    //this.loadDataRandom()
+    this.loadDataAll()
+    this.loadDataRandom()
+  }
+
+  async loadDataAll(): Promise<any> {
     this.trackService.getAllTracks$().subscribe(
-      response=>{
-        console.log(response)
+      (response: TrackModel[])=>{
+        this.tracksTrending = response
       }
     )
   }
 
-  async loadDataAll(): Promise<any> {
-    //this.tracksTrending =
-    /*this.trackService.getAllTracks$().subscribe(
-      response=>{
-        console.log(response)
-      }
-    )*/
-  }
-
   loadDataRandom(): void {
-
-    //this.trackService.getAllRandom$()
-    //  .subscribe((response: TrackModel[]) => {
-    //    this.tracksRandom = response
-    //  })
-
+    this.trackService.getAllRandom$().subscribe(
+      (response: TrackModel[])=>{
+        this.tracksRandom = response
+      }
+    )
   }
 
   ngOnDestroy(): void {
-
   }
 
 }
