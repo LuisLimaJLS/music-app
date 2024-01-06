@@ -38,6 +38,7 @@ export class TrackService {
          //  return data.reverse()
          //})
         catchError((err) => {
+          //captura el status en el err
           const { status, statusText } = err;
           return of([])
         })

@@ -1,12 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '@modules/auth/services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login-page',
   standalone: true,
   imports: [
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
@@ -17,8 +22,8 @@ export class LoginPageComponent {
   formLogin: FormGroup = new FormGroup({});
 
   constructor(
-    //private authService: AuthService, private cookie: CookieService,
-    //private router: Router
+    private authService: AuthService, private cookie: CookieService,
+    private router: Router
     ) {
 
     }
@@ -42,19 +47,20 @@ export class LoginPageComponent {
 
   sendLogin(): void {
     const { email, password } = this.formLogin.value
-    /*this.authService.sendCredentials(email, password)
+    this.authService.sendCredentials(email, password)
       //TODO: 200 <400
       .subscribe(responseOk => { //TODO: Cuando el usuario credenciales Correctas ✔✔
         console.log('Session iniciada correcta', responseOk);
         const { tokenSession, data } = responseOk
-        this.cookie.set('token', tokenSession, 4, '/') //TODO:📌📌📌📌
+        //guardo la cookie para la sesion
+        this.cookie.set('token', tokenSession, 4, '/') // 4 dias / para toda la app
         this.router.navigate(['/', 'tracks'])
       },
         err => {//TODO error 400>=
           this.errorSession = true
-          console.log('Ocurrio error con tu email o password');
+          console.log('⚠⚠⚠⚠Ocurrio error con tu email o password');
         })
-*/
+
   }
 
 

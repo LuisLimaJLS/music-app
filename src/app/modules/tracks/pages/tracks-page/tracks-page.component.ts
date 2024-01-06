@@ -25,11 +25,8 @@ export class TracksPageComponent {
   }
 
   async loadDataAll(): Promise<any> {
-    this.trackService.getAllTracks$().subscribe(
-      (response: TrackModel[])=>{
-        this.tracksTrending = response
-      }
-    )
+    this.tracksTrending = await this.trackService.getAllTracks$().toPromise()
+
   }
 
   loadDataRandom(): void {
